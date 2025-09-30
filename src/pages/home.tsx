@@ -1,0 +1,21 @@
+import { Footer7 } from "../components/footer";
+import Hero from "../components/home/hero";
+import { Logos3 } from "../components/home/partners";
+import { Feature166 } from "../components/home/recent";
+import { MarqueeDemo } from "../components/home/review";
+import { Stats8 } from "../components/home/stat";
+
+export default function Home() {
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Hero />
+      <Logos3 />
+      <Stats8 />
+      <Feature166 />
+      <MarqueeDemo />
+      <Footer7 />
+    </div>
+  );
+}
