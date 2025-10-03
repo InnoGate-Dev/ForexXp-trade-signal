@@ -1,63 +1,54 @@
-import { TrendingUp, Users, Zap } from "lucide-react";
 import { Button } from "../ui/button";
+import Lottie from "lottie-react";
+import cryptoAnimation from "../../assets/Revenue.json";
 
 export default function Hero() {
   return (
     <div>
-      <section className="h-full overflow-hidden py-30">
-        <div className="container border-b border-t border-dashed">
-          <div className="relative flex w-full max-w-5xl flex-col justify-start border border-t-0 border-dashed px-5 py-12 md:items-center md:justify-center lg:mx-auto">
-            <p className="text-muted-foreground flex items-center gap-2 text-sm">
-              <span className="inline-block size-2 rounded bg-green-500" />
-              NEW BLOCKS IN 10 DAYS
-            </p>
-            <div className="mb-7 mt-3 w-full max-w-xl text-5xl font-medium tracking-tighter md:mb-10 md:text-center md:text-6xl lg:relative lg:mb-0 lg:text-left lg:text-7xl">
-              <h1 className="relative z-10 inline md:mr-3">
-                A Smarter Way to <br className="block md:hidden" /> Build New{" "}
-                <br className="block md:hidden" />
+      <section className="relative min-h-[80vh] flex items-center  overflow-hidden mt-20">
+        <div className="mx-auto w-full px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 lg:gap-20 max-w-7xl mx-auto">
+            {/* Left Content */}
+            <div className="flex flex-col justify-center text-center md:text-left space-y-8">
+              <p className="flex items-center justify-center md:justify-start gap-2 text-sm text-muted-foreground">
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                Real-Time Trade Signals
+              </p>
+
+              <h1 className="text-4xl font-extrabold tracking-tight leading-tight md:text-6xl lg:text-7xl">
+                Profitable Trade Signals <br className="hidden md:block" />
+                for Every Trader
               </h1>
-              {/*<ContainerTextFlip
-                className="absolute text-4xl font-medium font-semibold tracking-tighter md:bottom-4 md:left-1/2 md:-translate-x-1/2 md:text-5xl lg:-bottom-4 lg:left-auto lg:translate-x-0 lg:text-7xl"
-                words={["Products", "Services", "Features", "Blocks"]}
-              />*/}
+
+              <p className="text-muted-foreground max-w-xl mx-auto md:mx-0 md:text-lg">
+                Stay ahead of the market with accurate trading signals powered
+                by real-time data and AI-driven insights. Boost your trading
+                confidence and profitability with ease.
+              </p>
+
+              <div className="flex justify-center md:justify-start gap-4 pt-4">
+                <Button size="lg" className="h-12 px-8 text-lg rounded-xl">
+                  Get Started Now
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-12 px-8 text-lg rounded-xl"
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Content: Animation */}
+            <div className="flex items-center justify-center lg:justify-end">
+              <Lottie
+                animationData={cryptoAnimation}
+                loop={true}
+                className="w-[360px] md:w-[480px] lg:w-[600px]"
+              />
             </div>
           </div>
-          <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center border border-b-0 border-t-0 border-dashed py-20">
-            <div className="w-full max-w-2xl space-y-5 md:text-center">
-              <p className="text-muted-foreground px-5 lg:text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam,{" "}
-              </p>
-              <Button className="mx-5 h-12 rounded-lg">Get Started Now</Button>
-            </div>
-          </div>
-          <ul className="md:h-34 mx-auto grid h-44 w-full max-w-5xl grid-cols-1 border border-b-0 border-dashed md:grid-cols-2 lg:h-24 lg:grid-cols-3">
-            <li className="flex h-full items-center justify-between gap-10 px-5 md:gap-3 lg:justify-center">
-              <div className="bg-muted flex size-12 items-center justify-center rounded-lg">
-                <Zap className="text-muted-foreground size-6" />
-              </div>
-              <p className="text-muted-foreground text-lg">
-                10x Faster Development
-              </p>
-            </li>
-            <li className="flex h-full items-center justify-between gap-10 border-l border-t border-dashed px-5 md:gap-3 lg:justify-center lg:border-t-0">
-              <div className="bg-muted flex size-12 items-center justify-center rounded-lg">
-                <Users className="text-muted-foreground size-6" />
-              </div>
-              <p className="text-muted-foreground text-lg">
-                10,000+ Developers
-              </p>
-            </li>
-            <li className="col-span-1 flex h-full items-center justify-between gap-10 border-l border-t border-dashed px-5 md:col-span-2 md:justify-center md:gap-3 lg:col-span-1 lg:border-t-0">
-              <div className="bg-muted flex size-12 items-center justify-center rounded-lg">
-                <TrendingUp className="text-muted-foreground size-6" />
-              </div>
-              <p className="text-muted-foreground text-lg">
-                25% Conversion Boost
-              </p>
-            </li>
-          </ul>
         </div>
       </section>
     </div>
