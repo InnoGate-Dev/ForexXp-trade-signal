@@ -3,7 +3,7 @@ import Hero from "../components/home/hero";
 import { Logos3 } from "../components/home/partners";
 import { Feature166 } from "../components/home/recent";
 import { MarqueeDemo } from "../components/home/review";
-import { Stats8 } from "../components/home/stat";
+import { TradingStats } from "../components/home/stat";
 import Navbar from "../components/navbar";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Logos3 />
-      <Stats8 />
+      <TradingStats />
       <Feature166 />
       <MarqueeDemo />
       <Footer7 />

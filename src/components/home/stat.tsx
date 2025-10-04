@@ -1,6 +1,10 @@
-import { ArrowRight } from "lucide-react";
+"use client";
 
-interface Stats8Props {
+import { motion } from "framer-motion";
+//import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+
+interface StatsProps {
   heading?: string;
   description?: string;
   link?: {
@@ -9,66 +13,86 @@ interface Stats8Props {
   };
   stats?: Array<{
     id: string;
-    value: string;
+    value: number;
+    suffix?: string;
     label: string;
   }>;
 }
 
-const Stats8 = ({
+export function TradingStats({
   heading = "Platform performance insights",
-  description = "Ensuring stability and scalability for all users",
-  link = {
-    text: "Read the full impact report",
-    url: "https://www.shadcnblocks.com",
-  },
+  description = "Real-time analytics showing the accuracy and success of our trading signals.",
+  // link = {
+  //   text: "View detailed analytics",
+  //   url: "#",
+  // },
   stats = [
+    { id: "s1", value: 92, suffix: "%", label: "Signal accuracy rate" },
+    { id: "s2", value: 540, suffix: "+", label: "Active premium traders" },
     {
-      id: "stat-1",
-      value: "250%+",
-      label: "average growth in user engagement",
+      id: "s3",
+      value: 1.5,
+      suffix: "M",
+      label: "Monthly trading volume (USD)",
     },
-    {
-      id: "stat-2",
-      value: "$2.5m",
-      label: "annual savings per enterprise partner",
-    },
-    {
-      id: "stat-3",
-      value: "200+",
-      label: "integrations with top industry platforms",
-    },
-    {
-      id: "stat-4",
-      value: "99.9%",
-      label: "customer satisfaction over the last year",
-    },
+    { id: "s4", value: 78, suffix: "%", label: "User profit consistency" },
   ],
-}: Stats8Props) => {
+}: StatsProps) {
+  const [counts, setCounts] = useState(stats.map(() => 0));
+
+  useEffect(() => {
+    const intervals = stats.map((stat, index) => {
+      const duration = 1500;
+      const step = stat.value / (duration / 16);
+      return setInterval(() => {
+        setCounts((prev) => {
+          const newCounts = [...prev];
+          if (newCounts[index] < stat.value) {
+            newCounts[index] = Math.min(newCounts[index] + step, stat.value);
+          }
+          return newCounts;
+        });
+      }, 16);
+    });
+
+    return () => intervals.forEach(clearInterval);
+  }, [stats]);
+
   return (
-    <section className="py-32">
+    <section className=" text-black pt-34">
       <div className="container">
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold md:text-4xl">{heading}</h2>
-          <p>{description}</p>
-          <a
-            href={link.url}
-            className="flex items-center gap-1 font-bold hover:underline"
-          >
-            {link.text}
-            <ArrowRight className="h-auto w-4" />
-          </a>
-        </div>
-        <div className="mt-14 grid gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.id} className="flex flex-col gap-5">
-              <div className="text-6xl font-bold">{stat.value}</div>
-              <p>{stat.label}</p>
-            </div>
+        <motion.div
+          className="flex flex-col items-start gap-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl font-bold md:text-5xl bg-black bg-clip-text text-transparent">
+            {heading}
+          </h2>
+          <p className="text-gray-800 max-w-2xl">{description}</p>
+        </motion.div>
+
+        <div className="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.id}
+              className="flex flex-col items-start"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+            >
+              <div className="text-5xl md:text-6xl font-extrabold text-black">
+                {counts[i].toFixed(stat.value < 10 ? 1 : 0)}
+                {stat.suffix}
+              </div>
+              <p className="mt-3 text-gray-400 text-sm">{stat.label}</p>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export { Stats8 };
+}
